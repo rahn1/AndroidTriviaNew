@@ -22,15 +22,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+    private NavController mNavController;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        NavHostFragment fragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
+        NavHostFragment navHostFragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
+        mNavController = navHostFragment.getNavController();
+        NavigationUI.setupActionBarWithNavController(this, mNavController);
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        return mNavController.navigateUp();
     }
 }
 
