@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -40,6 +41,7 @@ import com.example.android.navigation.databinding.FragmentTitleBinding;
 public class TitleFragment extends Fragment {
 
     private NavController mNavController;
+    private NavController mNavController2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +51,13 @@ public class TitleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mNavController.navigate(R.id.action_titleFragment_to_gameFragment);
+            }
+        });
+        mNavController2 = NavHostFragment.findNavController(this);
+        binding.rulesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mNavController2.navigate(R.id.action_titleFragment_to_rulesFragment);
             }
         });
         setHasOptionsMenu(true);
