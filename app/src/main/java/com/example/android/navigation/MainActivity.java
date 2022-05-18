@@ -20,15 +20,19 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.android.navigation.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
     private NavController mNavController;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,11 +42,21 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
         mNavController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, mNavController);
+
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        mDrawerLayout = binding.drawerLayout;
+        NavigationUI.setupActionBarWithNavController(this, mNavController, mDrawerLayout);
+
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        return mNavController.navigateUp();
+        if(mDrawerLayout.isOpen()){
+            mDrawerLayout.close();
+            return false;
+        }
+        return NavigationUI.navigateUp(mNavController, mDrawerLayout);
     }
 }
 
