@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.android.navigation.databinding.FragmentTitleBinding;
+import com.example.android.navigation.databinding.FragmentRulesBinding;
 
 public class RulesFragment extends Fragment {
 
@@ -18,7 +18,7 @@ public class RulesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable Bundle savedInstanceState) {
-        FragmentRulesBinding binding = FragmentTitleBinding.inflate(inflater);
+        FragmentRulesBinding binding = FragmentRulesBinding.inflate(inflater);
         mNavController3 = NavHostFragment.findNavController(this);
         binding.playButton2.setOnClickListener(new View.OnClickListener() {
             @Override
